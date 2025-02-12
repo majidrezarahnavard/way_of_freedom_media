@@ -1,18 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مخزن سایت فیلترشکن</title>
-    
+    <meta name="description" content="repo for media (way_of_freedom)">
+    <meta name="keywords" content="media, filtershekan">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="site/style.css">
 </head>
 
-<body>
-    <h2>
-        مخزن سایت فیلترشکن (رسانه ها)
-    </h2>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom/main/docs/assets/logo.png"
+                    alt="logo way_of_freedom" width="45" height="45" class="rounded-3 me-2">
+                <span>مخزن فیلترشکن</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="https://filtershekan.sbs">سایت فیلترشکن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#search">جستجو</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">مخزن</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <div class="container py-4">
+        <form class="row g-2" id="search">
+            <div class="col-md-3">
+                <select class="form-select" id="search-type" name="on">
+                    <option value="title">عنوان</option>
+                    <option value="description">توضیحات</option>
+                    <option value="file">نام فایل</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="search-value" placeholder="متن جستجو">
+            </div>
+            <div class="col-md-3">
+                <button type="submit" id="search-btn" class="btn btn-primary w-100">جستجو</button>
+            </div>
+        </form>
+
+        <div id="sources" class="mt-4 bg-black"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-rbK1E5WIpE1BMmyI56PZsdJzt/9w/6w8p8oD9A96Rk5A5FzZiKKM7B7h7B/wCTI+"
+        crossorigin="anonymous"></script>
+        <script src="site/script.js"></script>
 </body>
 
 </html>
