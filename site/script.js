@@ -40,13 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let textSpan = document.createElement("span");
             textSpan.textContent = `${item.title} - ${item.description}`;
+            textSpan.style = "width:60%;";
 
             let viewButton = document.createElement("a");
             viewButton.classList.add("btn", "btn-primary", "btn-sm");
             viewButton.textContent = "مشاهده";
             viewButton.href = sourcesPath + item.file;
             viewButton.target = "_blank";
-
+            viewButton.style = "margin:5px;"
+            
             let copyButton = document.createElement("button");
             copyButton.classList.add("btn", "btn-secondary", "btn-sm", "ms-2");
             copyButton.textContent = "کپی لینک";
