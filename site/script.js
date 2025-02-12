@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             reSourceType = await response.json();
-            reSourceType = reSourceType[searchType];
         } catch (error) {
             console.error("Error fetching data:", error);
         };

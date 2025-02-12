@@ -1,8 +1,77 @@
-# inputs
-typeS = input("enter type source[video, audio, image]:").lower()
-nameFile = input("enter file(path)[image.png, video.mp4, audio.mp3]")
-nameFileAfter = input("enter name file:")
-description = input("enter description for file:")
-title = input("enter title for file:")
-sourcePath = "https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/main/source"
+import os
+import json
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin, urlparse
+
+# URL of the target website
+url = input("Enter the website URL: ")
+
+# Create source folder if not exists
+if not os.path.exists("source"):
+    os.makedirs("source")
+
+# Fetch and parse the webpage
+response = requests.get(url)
+if response.status_code != 200:
+    print("Failed to fetch the webpage.")
+    exit()
+
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Load existing data
+try:
+    with open("all.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    data = []
+
+# Function to download and save files
+def download_file(file_url, file_name):
+    file_path = os.path.join("source", file_name)
     
+    try:
+        with requests.get(file_url, stream=True) as r:
+            r.raise_for_status()
+            with open(file_path, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        return file_name, True
+    except requests.RequestException as e:
+        print(f"Failed to download {file_url}: {e}")
+        return file_name, False
+
+# Extract media files
+downloaded_files = []
+failed_files = []
+
+for tag in soup.find_all(["img"]):
+    src = tag.get("src")
+    alt = tag.get("alt", "No description")
+    
+    if src:
+        file_url = urljoin(url, src)
+        file_name = os.path.basename(urlparse(file_url).path)
+        
+        saved_file, success = download_file(file_url, file_name)
+        if success:
+            downloaded_files.append(saved_file)
+            data.append({
+                "title": file_name,
+                "description": alt,
+                "file": saved_file
+            })
+        else:
+            failed_files.append(saved_file)
+
+# Save updated JSON
+with open("all.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
+
+# Print summary
+print("\nDownload Summary:")
+print(f"✔️ Downloaded files: {len(downloaded_files)}")
+if failed_files:
+    print(f"❌ Failed files ({len(failed_files)}): {', '.join(failed_files)}")
+else:
+    print("✅ All files downloaded successfully!")
