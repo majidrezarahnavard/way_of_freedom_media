@@ -8,7 +8,7 @@ index.html = website => search, copy link, view file
 source = all files
 
 # add file
-copy file => /source/
-run => add-to-json.py
-push => repo
+1. copy file => /source/
+2. run => add-to-json.py
+3. push => repo
 
