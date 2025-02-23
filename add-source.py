@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, quote
 
 # URL of the target website
 url = input("Enter the website URL: ")
@@ -30,8 +30,17 @@ except (FileNotFoundError, json.JSONDecodeError):
 def file_exists(file_name):
     return os.path.exists(os.path.join("source", file_name))
 
+# Function to sanitize filename
+def sanitize_filename(url_path):
+    parsed = urlparse(url_path)
+    file_name = parsed.path.strip("/").replace("/", "_")  # Replace slashes with underscores
+    if parsed.query:
+        file_name += "_" + quote(parsed.query, safe='')  # Append query as part of filename
+    return file_name if file_name else "unnamed_file"
+
 # Function to download and save files
-def download_file(file_url, file_name):
+def download_file(file_url):
+    file_name = sanitize_filename(file_url)
     file_path = os.path.join("source", file_name)
 
     if file_exists(file_name):
@@ -60,13 +69,12 @@ for tag in soup.find_all(["img"]):
 
     if src:
         file_url = urljoin(url, src)
-        file_name = os.path.basename(urlparse(file_url).path)
-
-        saved_file, success = download_file(file_url, file_name)
+        saved_file, success = download_file(file_url)
+        
         if success and not any(entry["file"] == saved_file for entry in data):
             downloaded_files.append(saved_file)
             data.append({
-                "title": file_name,
+                "title": saved_file,
                 "description": alt,
                 "file": saved_file
             })
