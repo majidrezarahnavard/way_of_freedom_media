@@ -36,7 +36,7 @@ elif file_choice == "2":
                 f.write(chunk)
         
         print(f"✅ File downloaded and saved as {file_path}")
-        print(f"use link: https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/refs/heads/main/${file_path}")
+        print(f"use link: https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/refs/heads/main/{file_path}")
     except requests.RequestException as e:
         print(f"❌ Failed to download the file: {e}")
         exit(1)
@@ -56,3 +56,4 @@ with open(json_file, "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 print("✅ The file has been successfully updated!")
+print("✅ Please push!")
