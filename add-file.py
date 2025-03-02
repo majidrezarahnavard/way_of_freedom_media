@@ -20,6 +20,7 @@ file_choice = input("Do you want to enter a file name (1) or download from URL (
 
 if file_choice == "1":
     file_name = input("Enter file name in /source/: ").strip()
+    print(f"use link: https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/refs/heads/main/{source_dir+"/"+file_name}")
 elif file_choice == "2":
     file_url = input("Enter the file URL: ").strip()
     
