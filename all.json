@@ -318,5 +318,10 @@
         "title": "users_472_screenshots_191949_other_icon.png",
         "description": "Other",
         "file": "users_472_screenshots_191949_other_icon.png"
+    },
+    {
+        "title": "Start box FG",
+        "description": "Start box (new user) Freedom Guhard",
+        "file": "start-box-fg.png"
     }
 ]
