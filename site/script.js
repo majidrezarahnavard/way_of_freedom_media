@@ -33,27 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let list = document.createElement("ul");
         list.classList.add("list-group");
+        list.style = "padding:0";
 
         data.forEach(item => {
             let listItem = document.createElement("li");
-            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
-
+            listItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center", "list-item-search");
+            listItem.innerHTML = `
+            <img src="${sourcesPath + item.file}">
+            `;
             let textSpan = document.createElement("span");
             textSpan.textContent = `${item.title} - ${item.description}`;
-            textSpan.style = "width:60%;";
+            textSpan.style = "width:60%;padding:0";
 
             let viewButton = document.createElement("a");
-            viewButton.classList.add("btn", "btn-primary", "btn-sm");
+            viewButton.classList.add("btn", "btn-info", "btn-sm", "rounded-pill", "shadow-sm", "px-3", "py-1");
             viewButton.textContent = "مشاهده";
             viewButton.href = sourcesPath + item.file;
             viewButton.target = "_blank";
             viewButton.style = "margin:5px;"
-            
+
             let copyButton = document.createElement("button");
-            copyButton.classList.add("btn", "btn-secondary", "btn-sm", "ms-2");
-            copyButton.textContent = "کپی لینک";
+            copyButton.classList.add("btn", "btn-dark", "btn-sm", "rounded", "shadow-sm", "px-3", "py-1", "ms-2");
+            copyButton.textContent = "لینک";
             copyButton.addEventListener("click", () => {
-                navigator.clipboard.writeText(item.file).then(() => {
+                navigator.clipboard.writeText(sourcesPath + item.file).then(() => {
                     alert("لینک کپی شد!");
                 }).catch(err => console.error("خطا در کپی لینک:", err));
             });

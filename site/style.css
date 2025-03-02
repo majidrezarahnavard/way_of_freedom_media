@@ -2,3 +2,10 @@
     text-wrap: balance;
     word-wrap: break-word;
 }
+.list-item-search img {
+    max-width: 50px;
+    border-radius: 8px;
+}
+.container {
+    max-width: 1330px;
+}
