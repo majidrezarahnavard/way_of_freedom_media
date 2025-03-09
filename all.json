@@ -323,5 +323,10 @@
         "title": "Start box FG",
         "description": "Start box (new user) Freedom Guhard",
         "file": "start-box-fg.png"
+    },
+    {
+        "title": "Contribute",
+        "description": "Contribute to projects",
+        "file": "Why-Should-You-Contribute-to-Open-Source-Projects-min.jpg"
     }
 ]
