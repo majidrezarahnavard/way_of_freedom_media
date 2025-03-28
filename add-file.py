@@ -20,12 +20,12 @@ file_choice = input("Do you want to enter a file name (1) or download from URL (
 
 if file_choice == "1":
     file_name = input("Enter file name in /source/: ").strip()
-    print(f"use link: https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/refs/heads/main/{source_dir+"/"+file_name}")
+    print(f"use link: https://raw.githubusercontent.com/majidrezarahnavard/way_of_freedom_media/refs/heads/main/{source_dir}/{file_name}")
 elif file_choice == "2":
     file_url = input("Enter the file URL: ").strip()
     
-    file_name = file_url.split("/")[-1]
-    file_path = os.path.join(source_dir, file_name)
+    file_name = input("Enter file name with .ext: ").strip()
+    file_path = os.path.join(source_dir, file_name).split("?")[0]
     
     try:
         print("Downloading file...")
